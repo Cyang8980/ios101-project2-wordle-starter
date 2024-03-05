@@ -49,7 +49,7 @@ class ViewController: UIViewController,
     // ...
     // END YOUR CODE HERE
   }
-  
+
   @objc private func didTapSettingsButton() {
     performSegue(withIdentifier: segueIdentifier, sender: nil)
   }

@@ -48,11 +48,11 @@ class BoardController: NSObject,
   // Exercise 5 Pt. 2 (optional): This function only needs to be implemented if you decide to do the optional requirement (see Pt. 1 in ViewController.swift)
   // This function should reset the board with the current settings without changing the goalWord
   // Tip: Take a look at how resetBoard is implemented above. The only difference is that you don't want to change the settings
-  func resetBoardWithCurrentSettings() {
-    // START YOUR CODE HERE
-    // ...
-    // END YOUR CODE HERE
-  }
+    func resetBoardWithCurrentSettings() {
+        // START YOUR CODE HERE
+        // ...
+        // END YOUR CODE HERE
+    }
   
   // Exercise 1: Implement applyNumLettersSettings to change the number of letters in the goal word
   // Tip 1: Use a breakpoint to inspect or print the `settings` argument
@@ -63,6 +63,9 @@ class BoardController: NSObject,
   private func applyNumLettersSettings(with settings: [String: Any]) {
     // START YOUR CODE HERE
     // ...
+      if let numLetters = settings[kNumLettersKey] as? Int {
+          numItemsPerRow = numLetters;
+      }
     // END YOUR CODE HERE
   }
   
@@ -75,6 +78,9 @@ class BoardController: NSObject,
   private func applyNumGuessesSettings(with settings: [String: Any]) {
     // START YOUR CODE HERE
     // ...
+      if let numGuesses = settings[kNumGuessesKey] as? Int {
+          numRows = numGuesses;
+      }
     // END YOUR CODE HERE
   }
   
@@ -88,6 +94,13 @@ class BoardController: NSObject,
   private func applyThemeSettings(with settings: [String: Any]) {
     // START YOUR CODE HERE
     // ...
+      if let themeString = settings[kWordThemeKey] as? String {
+          if let theme = WordTheme(rawValue: themeString) {
+              goalWord = WordGenerator.generateGoalWord(with: theme)
+          } else {
+              print("Invalid theme: \(themeString)")
+          }
+      }
     // END YOUR CODE HERE
   }
   
@@ -98,6 +111,11 @@ class BoardController: NSObject,
   private func applyIsAlienWordleSettings(with settings: [String: Any]) {
     // START YOUR CODE HERE
     // ...
+      if let alienTheme = settings[kIsAlienWordleKey] as? Bool {
+          if alienTheme == true {
+              self.isAlienWordle = true;
+          }
+      }
     // START YOUR CODE HERE
   }
 }
